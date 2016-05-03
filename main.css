@@ -1,0 +1,64 @@
+body {
+  background-color: #aaaaaa;
+}
+
+.simon {
+  margin: 100px auto;
+  width: 400px;
+  padding: 50px;
+  background-color: black;
+  height: 400px;
+  border-radius: 400px;
+}
+
+.quad {
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  float: left;
+  opacity: .3;
+}
+
+.green {
+  background-color: rgb(0,255,0);
+  border-top-left-radius: 200px;
+}
+.green.active {
+  -webkit-box-shadow: 0px 0px 35px 6px rgba(0,255,0,1);
+  -moz-box-shadow: 0px 0px 35px 6px rgba(0,255,0,1);
+  box-shadow: 0px 0px 35px 6px rgba(0,255,0,1);
+}
+
+.red {
+  background-color: rgb(255,0,0);
+  border-top-right-radius: 200px;
+}
+.red.active {
+  -webkit-box-shadow: 0px 0px 35px 6px rgba(255,0,0,1);
+  -moz-box-shadow: 0px 0px 35px 6px rgba(255,0,0,1);
+  box-shadow: 0px 0px 35px 6px rgba(255,0,0,1);
+}
+
+.yellow {
+  background-color: rgb(255,255,0);
+  border-bottom-left-radius: 200px;
+}
+.yellow.active {
+  -webkit-box-shadow: 0px 0px 35px 6px rgba(255,255,0,1);
+  -moz-box-shadow: 0px 0px 35px 6px rgba(255,255,0,1);
+  box-shadow: 0px 0px 35px 6px rgba(255,255,0,1);
+}
+
+.blue {
+  background-color: rgb(0,0,255);
+  border-bottom-right-radius: 200px;
+}
+.blue.active {
+  -webkit-box-shadow: 0px 0px 35px 6px rgba(0,0,255,1);
+  -moz-box-shadow: 0px 0px 35px 6px rgba(0,0,255,1);
+  box-shadow: 0px 0px 35px 6px rgba(0,0,255,1);
+}
+
+.active {
+  opacity: 1;
+}
