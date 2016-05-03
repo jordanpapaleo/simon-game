@@ -1,4 +1,4 @@
-var history = []
+var colorHistory = []
 
 function getRandomColor () {
   var colors = ['red', 'yellow', 'blue', 'green']
@@ -7,10 +7,21 @@ function getRandomColor () {
   return randomColor
 }
 
-function start () {
-  history = []
+function seedForTests (seedCount) {
+  while (seedCount > 0) {
+    colorHistory.push(getRandomColor())
+    seedCount--
+  }
 }
 
-function addColor () {
-  history.push(getRandomColor())
+function animate (colorSet) {
+
+}
+
+function turnOn (color) {
+
+}
+
+function newGame () {
+
 }
