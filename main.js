@@ -1,6 +1,8 @@
-var colorHistory = ['red', 'yellow', 'blue', 'green']
+var colorHistory = []
+var score = 0
+var isUserTurn = true
+var clickIndex = 0
 
-//
 function getRandomColor () {
   var colors = ['red', 'yellow', 'blue', 'green']
   var randomIndex = Math.floor(Math.random() * colors.length)
@@ -8,22 +10,21 @@ function getRandomColor () {
   return randomColor
 }
 
-function seedForTests (seedCount) {
+/* function seedForTests (seedCount) {
   while (seedCount > 0) {
     colorHistory.push(getRandomColor())
     seedCount--
   }
-}
+} */
 
 function animate (colorSet) {
   var i = 0
-  var interval = setInterval(function() {
+  var interval = setInterval(function () {
     turnOn(colorSet[i])
-
     i++
-
     if (i >= colorSet.length) {
-      clearInterval(interval);
+      clearInterval(interval)
+      isUserTurn = true
     }
   }, 600)
 }
@@ -36,11 +37,55 @@ function turnOn (color) {
   }, 400)
 }
 
-function newGame () {
+function startGame () {
+  turnAllOff()
+  score = 0
   colorHistory = []
-  seedForTests(20)
+  newTurn()
+}
+
+function newTurn () {
+  isUserTurn = false
+  clickIndex = 0
+  var nextColor = getRandomColor()
+  colorHistory.push(nextColor)
   animate(colorHistory)
 }
 
+function userClick (ev) {
+  if (isUserTurn) {
+    var color = ev.target.dataset.color
+    turnOn(color)
+
+    // Got one right
+    if (color === colorHistory[clickIndex]) {
+      score++
+      clickIndex++
+
+      if (clickIndex === colorHistory.length) {
+        setTimeout(newTurn, 500)
+      }
+    } else if (color !== colorHistory[clickIndex]) {
+      gameOver()
+    }
+  }
+}
+
+function gameOver () {
+  // Report score or something
+  alert('Game Over')
+}
+
+function turnAllOff () {
+  for (let i = 0, j = quads.length; i < j; i++) {
+    quads[i].classList.remove('active')
+  }
+}
+
 var button = document.querySelector('button')
-button.addEventListener('click', newGame)
+button.addEventListener('click', startGame)
+
+var quads = document.querySelectorAll('.quad')
+for (let i = 0, j = quads.length; i < j; i++) {
+  quads[i].addEventListener('click', userClick)
+}
