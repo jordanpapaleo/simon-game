@@ -2,6 +2,14 @@ var colorHistory = []
 var score = 0
 var isUserTurn = true
 var clickIndex = 0
+var isPlaying = false
+
+var soundMap = {
+  red: 'c_sharp.wav',
+  yellow: 'd_sharp.wav',
+  blue: 'f_sharp.wav',
+  green: 'g_sharp.wav'
+}
 
 function getRandomColor () {
   var colors = ['red', 'yellow', 'blue', 'green']
@@ -30,7 +38,9 @@ function animate (colorSet) {
 }
 
 function turnOn (color) {
+  new Audio('assets/sounds/' + soundMap[color]).play()
   var quad = document.querySelector('.' + color)
+
   quad.classList.add('active')
   setTimeout(function () {
     quad.classList.remove('active')
@@ -39,6 +49,7 @@ function turnOn (color) {
 
 function startGame () {
   turnAllOff()
+  isPlaying = true
   score = 0
   colorHistory = []
   newTurn()
@@ -53,8 +64,8 @@ function newTurn () {
 }
 
 function userClick (ev) {
-  if (isUserTurn) {
-    var color = ev.target.dataset.color
+  var color = ev.target.dataset.color
+  if (isUserTurn && isPlaying) {
     turnOn(color)
 
     // Got one right
@@ -68,12 +79,19 @@ function userClick (ev) {
     } else if (color !== colorHistory[clickIndex]) {
       gameOver()
     }
+  } else if (!isPlaying) {
+    turnOn(color)
   }
 }
 
 function gameOver () {
-  // Report score or something
-  alert('Game Over')
+  isPlaying = false
+  console.log(score)
+
+  setTimeout(function () {
+    new Audio('assets/sounds/aww.wav').play()
+    // alert('Game Over')
+  }, 300)
 }
 
 function turnAllOff () {
