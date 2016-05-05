@@ -34,8 +34,10 @@ function animate (colorSet) {
   var interval = setInterval(function () {
     turnOn(colorSet[i])
     i++
-    if (i >= colorSet.length) {
+
+    if (i === colorSet.length) {
       clearInterval(interval)
+      statusNode.innerText = 'Your turn'
       isUserTurn = true
     }
   }, 600)
@@ -57,13 +59,13 @@ function startGame () {
   score = 0
   colorHistory = []
   newTurn()
+  score.innerText = 0
 }
 
 function newTurn () {
   isUserTurn = false
-  statusNode.innerText = 'Playing'
+  statusNode.innerText = 'Computers Turn'
   clickIndex = 0
-  score.innerText = 0
   var nextColor = getRandomColor()
   colorHistory.push(nextColor)
   animate(colorHistory)
