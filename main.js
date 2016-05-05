@@ -18,7 +18,7 @@ var button = document.querySelector('.btn')
 button.addEventListener('click', startGame)
 
 var quads = document.querySelectorAll('.quad')
-for (let i = 0, j = quads.length; i < j; i++) {
+for (var i = 0, j = quads.length; i < j; i++) {
   quads[i].addEventListener('click', userClick)
 }
 
