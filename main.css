@@ -10,7 +10,8 @@ h1 {
 
 .controls {
   top: 15px;
-  position: absolute;
+  position: fixed;
+  z-index: 100;
   right: 15px;
   border: 1px solid black;
   border-radius: 4px;
