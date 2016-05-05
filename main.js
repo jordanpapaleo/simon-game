@@ -11,19 +11,23 @@ var soundMap = {
   green: 'g_sharp.wav'
 }
 
+var scoreNode = document.querySelector('.score')
+var statusNode = document.querySelector('.status')
+
+var button = document.querySelector('.btn')
+button.addEventListener('click', startGame)
+
+var quads = document.querySelectorAll('.quad')
+for (let i = 0, j = quads.length; i < j; i++) {
+  quads[i].addEventListener('click', userClick)
+}
+
 function getRandomColor () {
   var colors = ['red', 'yellow', 'blue', 'green']
   var randomIndex = Math.floor(Math.random() * colors.length)
   var randomColor = colors[randomIndex]
   return randomColor
 }
-
-/* function seedForTests (seedCount) {
-  while (seedCount > 0) {
-    colorHistory.push(getRandomColor())
-    seedCount--
-  }
-} */
 
 function animate (colorSet) {
   var i = 0
@@ -57,7 +61,9 @@ function startGame () {
 
 function newTurn () {
   isUserTurn = false
+  statusNode.innerText = 'Playing'
   clickIndex = 0
+  score.innerText = 0
   var nextColor = getRandomColor()
   colorHistory.push(nextColor)
   animate(colorHistory)
@@ -71,6 +77,7 @@ function userClick (ev) {
     // Got one right
     if (color === colorHistory[clickIndex]) {
       score++
+      scoreNode.innerText = score
       clickIndex++
 
       if (clickIndex === colorHistory.length) {
@@ -86,11 +93,10 @@ function userClick (ev) {
 
 function gameOver () {
   isPlaying = false
-  console.log(score)
+  statusNode.innerText = 'Game Over'
 
   setTimeout(function () {
     new Audio('assets/sounds/aww.wav').play()
-    // alert('Game Over')
   }, 300)
 }
 
@@ -100,10 +106,9 @@ function turnAllOff () {
   }
 }
 
-var button = document.querySelector('button')
-button.addEventListener('click', startGame)
-
-var quads = document.querySelectorAll('.quad')
-for (let i = 0, j = quads.length; i < j; i++) {
-  quads[i].addEventListener('click', userClick)
-}
+/* function seedForTests (seedCount) {
+  while (seedCount > 0) {
+    colorHistory.push(getRandomColor())
+    seedCount--
+  }
+} */
